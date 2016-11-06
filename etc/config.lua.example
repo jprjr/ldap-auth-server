@@ -1,0 +1,58 @@
+local config = {
+    -- set a path to nginx
+    -- this is required
+    -- nginx = "/usr/sbin/nginx";
+
+    -- set the log level
+    -- default: error
+    -- valid values: debug, info, notice, warn, error, crit, alert, emerg
+    -- log_level = "error";
+
+    -- set a custom working directory
+    -- optional, defaults to $HOME/.ldap-auth-server
+    -- work_dir = "/home/user/something";
+    
+    -- set listen interface+port or unix path
+    -- optional, defaults to 127.0.0.1:8080
+    -- see http://nginx.org/en/docs/http/ngx_http_core_module.html#listen
+    -- listen = "127.0.0.1:8080";
+
+    -- set the number of worker processes
+    -- optional, defaults to 1
+    -- worker_processes = 1;
+
+    -- set the cache expire time, in seconds
+    -- defaults to 60 seconds
+    -- expire_time = 600;
+
+    -- set the realm
+    -- optional, defaults to 'default'
+    -- realm = 'default';
+
+    -- set the ldap host+port
+    -- optional, defaults to 127.0.0.1:389
+    -- ldap_host = "127.0.0.1:389"
+
+    -- set the login name of the root/search user
+    -- this doesn't need to be your actual root/admin
+    -- account, it can (and should) be a read-only
+    -- user for performing a search, or nil for
+    -- binding anonymously
+    -- root_dn = nil;
+    -- root_pass = nil;
+
+    -- set the search base
+    -- required
+    -- ldap_base = "ou=People,dc=example,dc=com"
+
+    -- set the search scope
+    -- valid values: base, onelevel, subtree
+    -- optional, defaults to server default (maybe?)
+    -- ldap_scope = "onelevel";
+
+    -- set the search filter
+    -- required
+    -- ldap_filter = "(uid=%u)";
+}
+
+return config;

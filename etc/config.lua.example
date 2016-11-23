@@ -31,7 +31,7 @@ local config = {
 
     -- set the ldap host+port
     -- optional, defaults to 127.0.0.1:389
-    -- ldap_host = "127.0.0.1:389"
+    -- ldap_host = "127.0.0.1:389";
 
     -- set the login name of the root/search user
     -- this doesn't need to be your actual root/admin
@@ -43,7 +43,7 @@ local config = {
 
     -- set the search base
     -- required
-    -- ldap_base = "ou=People,dc=example,dc=com"
+    -- ldap_base = "ou=People,dc=example,dc=com";
 
     -- set the search scope
     -- valid values: base, onelevel, subtree

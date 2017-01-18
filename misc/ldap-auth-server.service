@@ -1,0 +1,10 @@
+[Unit]
+description=ldap-auth-server
+After=network.target
+
+[Service]
+ExecStart=/opt/ldap-auth-server/bin/ldap-auth-server run
+User=ldap-auth-server
+
+[Install]
+WantedBy=multi-user.target

@@ -19,7 +19,7 @@ If you install them into a folder named `lua_modules`, then the script
 `bin/ldap-auth-server` will use (and *only* use) modules found under that
 folder. For example, after cloning you could run:
 
-```
+```bash
 luarocks install --tree lua_modules lualdap
 luarocks install --tree lua_modules luaposix
 luarocks install --tree lua_modules etlua
@@ -36,3 +36,14 @@ variable in `etc/config.lua`
 You can also copy `res/nginx.conf` somewhere and edit it, and setup
 an nginx instance on your own. In that case, the only required module is
 lualdap.
+
+To run as a service, there's an example systemd unit file at
+`misc/ldap-auth-server.service`:
+
+```bash
+sudo cp misc/ldap-auth-server.service /etc/systemd/system/ldap-auth-server.service
+# edit /etc/systemd/system/ldap-auth-server.service as needed
+sudo systemctl daemon-reload
+sudo systemctl enable ldap-auth-server.service
+sudo systemctl start ldap-auth-server.service
+```

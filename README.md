@@ -47,3 +47,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable ldap-auth-server.service
 sudo systemctl start ldap-auth-server.service
 ```
+
+## License
+
+Released under an MIT-style license. See the file `LICENSE` for details.
+

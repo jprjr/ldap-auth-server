@@ -85,4 +85,5 @@ if [ -e "${install_dir}/lua_modules" ] ; then
     export LUA_CPATH="${install_dir}/lua_modules/lib/lua/${lua_major_ver}/?.so;"
 fi
 
-exec ${lua_impl} "${install_dir}/bin/ldap-auth-server.lua"
+cd "${install_dir}"
+exec "${lua_impl}" "${install_dir}/bin/ldap-auth-server.lua"

@@ -53,6 +53,11 @@ local config = {
     -- set the search filter
     -- required
     -- ldap_filter = "(uid=%u)";
+
+    -- send more attributes as X-LDAP- attributes
+    -- for example, the givenName attribute will be returned
+    -- in an HTTP header named "X-LDAP-GIVENNAME"
+    -- extra_attrs = { 'givenName', 'displayName', 'sn', 'mail' };
 }
 
 return config;

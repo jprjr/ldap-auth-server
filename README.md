@@ -48,6 +48,10 @@ sudo systemctl enable ldap-auth-server.service
 sudo systemctl start ldap-auth-server.service
 ```
 
+You can store multiple config files and pass the name to the script. For example,
+if you had a config file at `etc/config-staff.lua`, you would run
+`bin/ldap-auth-server etc.config-staff`
+
 ## License
 
 Released under an MIT-style license. See the file `LICENSE` for details.

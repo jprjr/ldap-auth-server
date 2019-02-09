@@ -6,14 +6,45 @@ local exit = os.exit
 local getenv = os.getenv
 local etlua = require'etlua'
 
+local function format_table(tab,ind)
+  local str = '{\n'
+  for k,v in pairs(tab) do
+      if v then
+          local kt = type(k)
+
+          if kt == 'string' then
+              str = str .. string.rep(' ',ind) .. "  ['" .. k .. "']="
+          elseif kt == 'number' then
+              str = str .. string.rep(' ',ind) .. '  [' .. k .. ']='
+          end
+
+          local t = type(v)
+          if(t == "string") then
+              str = str .. '"' .. v .. '",\n'
+          elseif(t == "number") then
+              str = str .. v .. ',\n'
+          elseif(t == 'table') then
+              str = str .. format_table(v,ind+2) .. ',\n'
+          end
+      end
+  end
+  str = str .. string.rep(' ',ind) .. '}'
+  return str
+end
+
 local script_dir = posix.dirname(posix.dirname(posix.realpath(arg[0])))
 
 posix.chdir(script_dir)
+local mod_name = 'etc.config'
 
-local ok, config = pcall(require,'etc.config')
+if arg[1] then
+  mod_name = arg[1]
+end
+
+local ok, config = pcall(require,mod_name)
 
 if not ok then
-    print("Error: could not load " .. script_dir .. "/etc/config.lua")
+    print("Error: could not load " .. mod_name)
     exit(1)
 end
 
@@ -65,18 +96,19 @@ if not lfs.attributes(config.work_dir .. "/logs") then
 end
 
 local lof = io.open(config.work_dir .. "/config.lua", "wb")
-lof:write("return {\n")
-for k,v in pairs(config) do
-    if v then
-        local t = type(v)
-        if(t == "string") then
-            lof:write('  ' .. k ..'="' .. v .. '";\n')
-        elseif(t == "number") then
-            lof:write('  ' .. k ..'=' .. v .. ';\n')
-        end
-    end
-end
-lof:write("}\n")
+lof:write("return " .. format_table(config,0))
+-- lof:write("return {\n")
+-- for k,v in pairs(config) do
+--     if v then
+--         local t = type(v)
+--         if(t == "string") then
+--             lof:write('  ' .. k ..'="' .. v .. '";\n')
+--         elseif(t == "number") then
+--             lof:write('  ' .. k ..'=' .. v .. ';\n')
+--         end
+--     end
+-- end
+-- lof:write("}\n")
 lof:close()
 
 config.lua_package_path = package.path;
